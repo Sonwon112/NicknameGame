@@ -16,6 +16,9 @@ public class ListManager : MonoBehaviour
         
     }
 
-    public Open
+    public void OpenContent()
+    {
+
+    }
 
 }
