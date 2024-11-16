@@ -10,6 +10,7 @@ using WebSocketSharp;
 public class GameManager : MonoBehaviour
 {
     public static GameManager gameManagerInstance { get; set; }
+    private static string TOKEN = "0niyaNicknameGame";
     private void Awake()
     {
         if(gameManagerInstance == null)
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
     private string serviceName = "/connect";
     public WebSocket m_Socket;
     private static bool connectSuccess = false;
+    private List<string> participantList = new List<string>();
 
     private void Update()
     {
@@ -59,7 +61,8 @@ public class GameManager : MonoBehaviour
         if (!m_Socket.IsAlive) return;
         try
         {
-            SendDTO dto = new SendDTO();
+            DTO dto = new DTO();
+            dto.token = TOKEN;
             dto.type = type;
             dto.msg = message;
 
@@ -75,7 +78,7 @@ public class GameManager : MonoBehaviour
     public void onMessage(object sender, MessageEventArgs e)
     {
         Debug.Log(e.Data);
-        ReceiveDTO dto = JsonUtility.FromJson<ReceiveDTO>(e.Data);
+        DTO dto = JsonUtility.FromJson<DTO>(e.Data);
 
         if (dto == null)
         {
@@ -95,7 +98,9 @@ public class GameManager : MonoBehaviour
                 connectSuccess = true;
                 break;
             case NetworkingType.PERMIT:
-
+                Manager manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
+                manager.gettingMessage(dto.msg);
+                participantList.Add(dto.msg);
                 break;
             case NetworkingType.END:
 
@@ -128,14 +133,8 @@ public class GameManager : MonoBehaviour
 
 }
 
-public class SendDTO
-{
-    public string token = "0niyaNicknameGame";
-    public string type;
-    public string msg;
-}
 
-public class ReceiveDTO
+public class DTO
 {
     public string token;
     public string type;

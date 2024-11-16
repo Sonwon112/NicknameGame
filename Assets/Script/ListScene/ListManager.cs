@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ListManager : MonoBehaviour
+public class ListManager : MonoBehaviour, Manager
 {
-    public GameObject ParticipantWindow;
-    
+    public ParticipantWindow participantWindow;
     private ListContent currListContent;
+
+    private bool canPart = false;
+    private GameManager gameManager = GameManager.gameManagerInstance;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +32,26 @@ public class ListManager : MonoBehaviour
         }
         currListContent = gameObject.GetComponent<ListContent>();
 
+        participantWindow.setThumbnail(currListContent.Thumbnail);
+        participantWindow.gameObject.SetActive(true);
+    }
+
+    public void TogglePart()
+    {
+        switch (canPart)
+        {
+            case false:
+
+                break;
+            case true:
+
+                break;
+        }
+    }
+
+    public void gettingMessage(string msg)
+    {
+        participantWindow.AppendParticipant(msg);
     }
 
 }
