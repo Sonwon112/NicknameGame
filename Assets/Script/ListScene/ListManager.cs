@@ -38,13 +38,19 @@ public class ListManager : MonoBehaviour, Manager
 
     public void TogglePart()
     {
+        canPart = !canPart;
         switch (canPart)
         {
+            // 참여 활성시
             case false:
-
+                gameManager.Send(NetworkingType.PERMIT.ToString(), "permit");
+                participantWindow.ToggleParticipant(true);
                 break;
+            // 참여 비활성시
             case true:
-
+                gameManager.Send(NetworkingType.PERMIT.ToString(), "stop");
+                participantWindow.ToggleParticipant(false);
+                participantWindow.ActivOpenMap();
                 break;
         }
     }
@@ -52,6 +58,11 @@ public class ListManager : MonoBehaviour, Manager
     public void gettingMessage(string msg)
     {
         participantWindow.AppendParticipant(msg);
+    }
+
+    public void closeParticipantWindow()
+    {
+        participantWindow.gameObject.SetActive(false);
     }
 
 }

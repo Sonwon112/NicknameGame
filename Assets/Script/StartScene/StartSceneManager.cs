@@ -6,8 +6,9 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class StartSceneManager : MonoBehaviour
+public class StartSceneManager : MonoBehaviour, Manager
 {
 
     public GameObject SettingWindow;
@@ -126,6 +127,14 @@ public class StartSceneManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void gettingMessage(string msg)
+    {
+        if (msg.Equals("success"))
+        {
+            SceneManager.LoadScene(1);
+        }
     }
 
 

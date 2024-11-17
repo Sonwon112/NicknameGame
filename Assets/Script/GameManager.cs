@@ -33,10 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (connectSuccess)
-        {
-            SceneManager.LoadScene(1);
-        }
+        
     }
 
     public void ConnectServer(string channelId)
@@ -53,7 +50,7 @@ public class GameManager : MonoBehaviour
             throw new Exception(e.Message);
         }
         if (!m_Socket.IsAlive) throw new Exception("can't Connection");
-        Send("CONNECT", channelId);
+        Send(NetworkingType.CONNECT.ToString(), channelId);
     }
 
     public void Send(string type,string message)
@@ -91,15 +88,22 @@ public class GameManager : MonoBehaviour
             return;
         }
         NetworkingType type = (NetworkingType)Enum.Parse(typeof(NetworkingType), dto.type);
-
+        GameObject objManager = GameObject.FindGameObjectWithTag("Manager");
+        if (objManager == null)
+        {
+            Debug.LogError("Scene에 Manager가 없습니다");
+            return;
+        }
+        Manager manager = objManager.GetComponent<Manager>();
+        
+        manager.gettingMessage(dto.msg);
         switch (type)
         {
             case NetworkingType.CONNECT:
                 connectSuccess = true;
                 break;
             case NetworkingType.PERMIT:
-                Manager manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
-                manager.gettingMessage(dto.msg);
+                
                 participantList.Add(dto.msg);
                 break;
             case NetworkingType.END:

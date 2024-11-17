@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
 public class CharacterMovement : MonoBehaviour
 {
+    public TMP_Text NicknameText;
 
     private GameObject EndPosition;
     private Vector3 dir;
@@ -28,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
         dir.y = 0;
         dir.z = 0;
         dir = dir.normalized;
-        Debug.Log(dir);
+        //Debug.Log(dir);
     
         characterAnim = GetComponentInChildren<CharacterAnim>();
     }
@@ -49,7 +51,7 @@ public class CharacterMovement : MonoBehaviour
 
 
 
-        if (isReady)
+        /*if (isReady)
         {
             currTime = DateTime.Now.TimeOfDay.Seconds;
             if (currTime - prevTime >= 3)
@@ -58,7 +60,7 @@ public class CharacterMovement : MonoBehaviour
                 StartRace();
             }
 
-        }
+        }*/
         if (isSpeedUp)
         {
             currTime = DateTime.Now.TimeOfDay.Seconds;
@@ -101,5 +103,10 @@ public class CharacterMovement : MonoBehaviour
         isSpeedUp = false;
         speed = 3f;
         characterAnim.setSpeed(speed);
+    }
+
+    public void setNickname(string nickname)
+    {
+        NicknameText.text = nickname;
     }
 }
