@@ -23,17 +23,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private string ip = "127.0.0.1";
+    private string ip = "localhost";
     private string port = "8080";
 
     private string serviceName = "/connect";
     public WebSocket m_Socket;
     private static bool connectSuccess = false;
     private List<string> participantList = new List<string>();
+    private Manager sceneManager;
+
+    private void Start()
+    {
+        sceneManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
+    }
 
     private void Update()
     {
         
+    }
+
+    public void setSceneManager(Manager sceneManager)
+    {
+        this.sceneManager = sceneManager;
     }
 
     public void ConnectServer(string channelId)
@@ -64,6 +75,7 @@ public class GameManager : MonoBehaviour
             dto.msg = message;
 
             string classToJson = JsonUtility.ToJson(dto);
+            Debug.Log(classToJson);
             m_Socket.Send(classToJson);
         }
         catch(Exception e)
@@ -88,34 +100,27 @@ public class GameManager : MonoBehaviour
             return;
         }
         NetworkingType type = (NetworkingType)Enum.Parse(typeof(NetworkingType), dto.type);
-        GameObject objManager = GameObject.FindGameObjectWithTag("Manager");
-        if (objManager == null)
-        {
-            Debug.LogError("Scene에 Manager가 없습니다");
-            return;
-        }
-        Manager manager = objManager.GetComponent<Manager>();
-        
-        manager.gettingMessage(dto.msg);
+       
         switch (type)
         {
             case NetworkingType.CONNECT:
                 connectSuccess = true;
                 break;
             case NetworkingType.PERMIT:
-                
                 participantList.Add(dto.msg);
                 break;
             case NetworkingType.END:
 
                 break;
         }
+        sceneManager.gettingMessage(dto.msg);
 
 
     }
 
     public void onClose(object sender, CloseEventArgs e) {
-        Debug.Log(e.Reason);
+        Debug.LogWarning(e.Reason);
+        sceneManager.gettingMessage("fail");
     }
 
     public void DisconnectServer()
@@ -128,6 +133,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
+    }
+
+    public void ResetParticipantList()
+    {
+        participantList.Clear();
     }
 
     private void OnApplicationQuit()
@@ -149,5 +159,6 @@ public enum NetworkingType
 {
     CONNECT,
     PERMIT,
+    RESET,
     END
 }

@@ -15,6 +15,7 @@ public class StartSceneManager : MonoBehaviour, Manager
     public GameObject ExitWindow;
     public GameObject LoadingWindow;
     public GameObject DefaultBtnGroup;
+    public GameObject ErrorMessage;
 
     public GameManager gameManager;
 
@@ -24,8 +25,10 @@ public class StartSceneManager : MonoBehaviour, Manager
     private string settingText;
     private const string fileName = "settingData.json";
     private string path;
-    public static bool connectFaild = false;
+    private Thread connectThread;
 
+    public static bool connectFaild = false;
+    public static bool LoadNextScene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -56,9 +59,13 @@ public class StartSceneManager : MonoBehaviour, Manager
     {
         if (connectFaild)
         {
-            LoadingWindow.SetActive(false);
-            ShowDefaultGroup();
+            ConnectFailed();
             connectFaild = false;
+        }
+        if (LoadNextScene)
+        {
+            SceneManager.LoadScene(1);
+            LoadNextScene = false;
         }
     }
 
@@ -68,10 +75,9 @@ public class StartSceneManager : MonoBehaviour, Manager
         LoadingWindow.SetActive(true);
         Animator LoadingAnimator = LoadingWindow.GetComponentInChildren<Animator>();
         LoadingAnimator.SetBool("isLoading", true);
+        ErrorMessage.SetActive(false);
 
-
-
-        Thread thread = new Thread(() =>
+        connectThread = new Thread(() =>
         {
             try
             {
@@ -83,7 +89,17 @@ public class StartSceneManager : MonoBehaviour, Manager
                 connectFaild = true;
             }
         });
-        thread.Start();
+        connectThread.Start();
+    }
+    public void ConnectFailed()
+    {
+        DefaultBtnGroup.SetActive(true);
+        LoadingWindow.SetActive(false);
+        Animator LoadingAnimator = LoadingWindow.GetComponentInChildren<Animator>();
+        LoadingAnimator.SetBool("isLoading", false);
+        ErrorMessage.SetActive(true);
+
+        connectThread.Abort();
     }
 
     public void ShowDefaultGroup()
@@ -133,7 +149,11 @@ public class StartSceneManager : MonoBehaviour, Manager
     {
         if (msg.Equals("success"))
         {
-            SceneManager.LoadScene(1);
+            LoadNextScene = true;
+        }
+        if (msg.Equals("fail"))
+        {
+            connectFaild = true;
         }
     }
 

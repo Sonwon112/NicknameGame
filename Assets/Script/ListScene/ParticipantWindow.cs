@@ -14,8 +14,6 @@ public class ParticipantWindow : MonoBehaviour
     public Button btnOpenMap;
 
     private Sprite Thumbnail;
-    private int currPosY = -25;
-    private int interval = 40;
     private int index = 1;
 
     public void setThumbnail(Sprite Thumbnail)
@@ -27,10 +25,18 @@ public class ParticipantWindow : MonoBehaviour
     public void AppendParticipant(string nickname)
     {
         GameObject listTmp = Instantiate(ParticipantContent,ScrollView.transform);
-        listTmp.GetComponent<RectTransform>().anchoredPosition = new Vector3(0, currPosY, 0);
         listTmp.GetComponent<Participant>().id = index++;
         listTmp.GetComponent<Participant>().nickname = nickname;
-        currPosY -= interval;
+    }
+
+    public void ClearParticiapnt()
+    {
+       foreach(Transform child in ScrollView.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        setActiveOpenMap(false);
+        index = 1;
     }
 
     public void ToggleParticipant(bool isPart)
@@ -38,7 +44,7 @@ public class ParticipantWindow : MonoBehaviour
         switch(isPart)
         {
             case true:
-                txtMatch.text = "참여 금지";
+                txtMatch.text = "참여 종료";
                 break;
             case false:
                 txtMatch.text = "참여 허용";
@@ -46,8 +52,8 @@ public class ParticipantWindow : MonoBehaviour
         }
     }
 
-    public void ActivOpenMap()
+    public void setActiveOpenMap(bool active)
     {
-        btnOpenMap.interactable = true;
+        btnOpenMap.interactable = active;
     }
 }
