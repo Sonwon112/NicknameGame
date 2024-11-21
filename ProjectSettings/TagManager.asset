@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SkyboxCamera
+  - Manager
+  - VirtualCam
   layers:
   - Default
   - TransparentFX

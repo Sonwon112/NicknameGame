@@ -1,25 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ParticipantWindow : MonoBehaviour
 {
-    public Sprite Thumbnail { get; set; }
+    
     public GameObject ParticipantContent;
     public GameObject ScrollView;
+    public Image imgThumbnail;
+    public TMP_Text txtMatch;
+    public Button btnOpenMap;
 
-    private int currPosY;
-    private int interval = 40;
+    private Sprite Thumbnail;
+    private int index = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    public void setThumbnail(Sprite Thumbnail)
     {
-        
+        this.Thumbnail = Thumbnail;
+        imgThumbnail.sprite = Thumbnail;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void AppendParticipant(string nickname)
     {
-        
+        GameObject listTmp = Instantiate(ParticipantContent,ScrollView.transform);
+        listTmp.GetComponent<Participant>().id = index++;
+        listTmp.GetComponent<Participant>().nickname = nickname;
+    }
+
+    public void ClearParticiapnt()
+    {
+       foreach(Transform child in ScrollView.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        setActiveOpenMap(false);
+        index = 1;
+    }
+
+    public void ToggleParticipant(bool isPart)
+    {
+        switch(isPart)
+        {
+            case true:
+                txtMatch.text = "참여 종료";
+                break;
+            case false:
+                txtMatch.text = "참여 허용";
+                break;
+        }
+    }
+
+    public void setActiveOpenMap(bool active)
+    {
+        btnOpenMap.interactable = active;
     }
 }

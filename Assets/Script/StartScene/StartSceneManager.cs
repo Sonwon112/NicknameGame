@@ -6,14 +6,16 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class StartSceneManager : MonoBehaviour
+public class StartSceneManager : MonoBehaviour, Manager
 {
 
     public GameObject SettingWindow;
     public GameObject ExitWindow;
     public GameObject LoadingWindow;
     public GameObject DefaultBtnGroup;
+    public GameObject ErrorMessage;
 
     public GameManager gameManager;
 
@@ -23,8 +25,10 @@ public class StartSceneManager : MonoBehaviour
     private string settingText;
     private const string fileName = "settingData.json";
     private string path;
-    public static bool connectFaild = false;
+    private Thread connectThread;
 
+    public static bool connectFaild = false;
+    public static bool LoadNextScene = false;
 
     // Start is called before the first frame update
     void Start()
@@ -55,9 +59,13 @@ public class StartSceneManager : MonoBehaviour
     {
         if (connectFaild)
         {
-            LoadingWindow.SetActive(false);
-            ShowDefaultGroup();
+            ConnectFailed();
             connectFaild = false;
+        }
+        if (LoadNextScene)
+        {
+            SceneManager.LoadScene(1);
+            LoadNextScene = false;
         }
     }
 
@@ -67,10 +75,9 @@ public class StartSceneManager : MonoBehaviour
         LoadingWindow.SetActive(true);
         Animator LoadingAnimator = LoadingWindow.GetComponentInChildren<Animator>();
         LoadingAnimator.SetBool("isLoading", true);
+        ErrorMessage.SetActive(false);
 
-
-
-        Thread thread = new Thread(() =>
+        connectThread = new Thread(() =>
         {
             try
             {
@@ -82,7 +89,17 @@ public class StartSceneManager : MonoBehaviour
                 connectFaild = true;
             }
         });
-        thread.Start();
+        connectThread.Start();
+    }
+    public void ConnectFailed()
+    {
+        DefaultBtnGroup.SetActive(true);
+        LoadingWindow.SetActive(false);
+        Animator LoadingAnimator = LoadingWindow.GetComponentInChildren<Animator>();
+        LoadingAnimator.SetBool("isLoading", false);
+        ErrorMessage.SetActive(true);
+
+        connectThread.Abort();
     }
 
     public void ShowDefaultGroup()
@@ -126,6 +143,18 @@ public class StartSceneManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void gettingMessage(string msg)
+    {
+        if (msg.Equals("success"))
+        {
+            LoadNextScene = true;
+        }
+        if (msg.Equals("fail"))
+        {
+            connectFaild = true;
+        }
     }
 
 
