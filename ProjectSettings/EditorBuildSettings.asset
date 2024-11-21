@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/ListScene.unity
+    guid: 783ad0d5db1af124f988bcab3883cca3
+  - enabled: 1
+    path: Assets/Scenes/SantaLoad.unity
+    guid: f5bf6f041f8b0604a90fabbddaa8d356
   m_configObjects: {}
