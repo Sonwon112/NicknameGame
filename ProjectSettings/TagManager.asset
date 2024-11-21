@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SkyboxCamera
   - Manager
+  - VirtualCam
   layers:
   - Default
   - TransparentFX
