@@ -27,6 +27,9 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject txtCount;
     public GameObject PlayRanking;
     public GameObject EndRankingObj;
+
+    [Header("Header")]
+    public EventCard EventCard;
     
     private List<string> nicknameList = new List<string>();
     private List<GameObject> participantList = new List<GameObject> ();
@@ -245,4 +248,11 @@ public class PlayManager : MonoBehaviour, Manager
             tmp.GetComponent<CinemachineVirtualCamera>().Priority = 10;
         }
     }
+
+    public void DrawEvent()
+    {
+        Time.timeScale = 0;
+        EventCard.OpenCard(participantList);
+    }
+
 }
