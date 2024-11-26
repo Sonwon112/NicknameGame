@@ -8,8 +8,9 @@ using UnityEngine.UI;
 
 public class EventCard : MonoBehaviour
 {
-    public List<Event> eventsList = new List<Event>();
+    public List<GameObject> eventsList = new List<GameObject>();
     public GameObject TargetText;
+    public ParticleSystem Fanfare;
 
     private Animator m_Animator;
     private Image m_Thumbnail;
@@ -19,19 +20,22 @@ public class EventCard : MonoBehaviour
 
     private Event currEvent;
     private CharacterMovement currTarget;
-    private int randomIndex;
+    private int targetIndex;
+    private int eventIndex;
 
     private int type = 0; // 0 event 1 target
     // 뽑기 효과용 변수
     private int currCount = 0;
     private int index = 0;
-    private int[] countArr = {10, 18, 23, 26};
-    private float[] delayArr = { 1, 2, 3, 4};
+    private int[] countArr = { 15, 18, 22, 25 };
+    private float[] delayArr = { 0.1f, 0.15f, 0.3f, 0.5f };
     private float prevTime;
     private float currTime;
 
     private bool isNicknameDispaly = false;
     private int displayNicknameDelay = 3;
+    private const int DEFAULT_FONTSIZE = 80;
+    private const int HIGHLIGHT_FONTSIZE = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -44,53 +48,44 @@ public class EventCard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(callDraw)
+        if (callDraw)
         {
-            currCount++;
-            if (currCount > countArr[index]) index++;
-            if(index >  countArr.Length)
-            {
-                callDraw = false;
-                if (type == 0) { DisplayCard(); }
-                else
-                {
-                    isNicknameDispaly = true;
-                    prevTime = currTime = 0;
-                }
-                return;
-            }
+
             currTime += Time.unscaledDeltaTime;
-            if(currTime-prevTime > delayArr[index])
+            if (currTime - prevTime > delayArr[index])
             {
+                currCount++;
+                if (currCount > countArr[index]) index++;
+                if (index >= countArr.Length)
+                {
+                    callDraw = false;
+                    DisplayCard();
+                    return;
+                }
+
                 prevTime = currTime;
-                int tmp = type == 0 ? eventsList.Count : targets.Count;
-                randomIndex = UnityEngine.Random.Range(0, tmp);
-                switch(type)
-                {
-                    case 0:
-                        currEvent = eventsList[randomIndex];
-                        m_Thumbnail.sprite = currEvent.getThumbnail();
-                        m_Text.text = currEvent.getEventName();
-                        break;
-                    case 1:
-                        currTarget = targets[randomIndex].GetComponent<CharacterMovement>();
-                        TargetText.GetComponent<TMP_Text>().text = currTarget.NicknameText.text;
-                        break;
-                }
+                targetIndex = UnityEngine.Random.Range(0, targets.Count);
+                eventIndex = UnityEngine.Random.Range(0, eventsList.Count);
+
+                currEvent = eventsList[eventIndex].GetComponent<Event>();
+                m_Thumbnail.sprite = currEvent.getThumbnail();
+                m_Text.text = currEvent.getEventName();
+
+                currTarget = targets[targetIndex].GetComponent<CharacterMovement>();
+                TargetText.GetComponent<TMP_Text>().text = currTarget.NicknameText.text;
             }
         }
+    }
 
-        if(isNicknameDispaly) {
-            currTime += Time.unscaledDeltaTime;
-            if (currTime - prevTime >= displayNicknameDelay)
-            {
-                isNicknameDispaly = false;
-                TargetText.SetActive(false);
-                TargetText.GetComponent<TMP_Text>().text = "";
-                currEvent.playEvent();
-            }
-        }
+    public void PlayFanFare()
+    {
+        Fanfare.Play();
+    }
 
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        currEvent.playEvent(currTarget);
     }
 
     public void OpenCard(List<GameObject> targets)
@@ -127,5 +122,5 @@ public class EventCard : MonoBehaviour
         prevTime = 0;
         currTime = 0;
     }
-   
+
 }

@@ -17,7 +17,11 @@ public class ListManager : MonoBehaviour, Manager
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.setSceneManager(this);
+        if(gameManager != null)
+        {
+            gameManager.setSceneManager(this);
+            gameManager.ResetParticipantList();
+        }
     }
 
     // Update is called once per frame
@@ -75,7 +79,8 @@ public class ListManager : MonoBehaviour, Manager
     {
         participantWindow.gameObject.SetActive(false);
         participantWindow.ClearParticiapnt();
-        gameManager.Send(NetworkingType.RESET.ToString(), "closing window reset");
+        gameManager.Send(NetworkingType.PERMIT.ToString(), "stop");
+        participantWindow.ToggleParticipant(false);
         gameManager.ResetParticipantList();
     }
 

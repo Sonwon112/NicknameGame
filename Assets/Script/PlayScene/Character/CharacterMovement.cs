@@ -13,14 +13,17 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 dir;
     
     private float speed= 3f;
-    private const float DEFAULT_MIN_SPEED = 3f;
-    private const float DEFAULT_MAX_SPEED = 4f;
-    private const float FAST_SPEED = 6f;
-
+    private const float DEFAULT_MIN_SPEED = 4f;
+    private const float DEFAULT_MAX_SPEED = 5f;
+    private const float FAST_SPEED = 8f;
+    private const float SLOW_MIN_SPEED = 1f;
+    private const float SLOW_MAX_SPEED = 2f;
 
     private bool isReady = false;
     private bool isRaceStart = false;
     private bool isSpeedUp = false;
+    private bool isTarget = false;
+    private PlayManager playManager;
 
     private CharacterAnim characterAnim;
 
@@ -40,6 +43,7 @@ public class CharacterMovement : MonoBehaviour
         characterAnim = GetComponentInChildren<CharacterAnim>();
 
         speed = changeSpeed();
+        playManager = GameObject.Find("PlayManager").GetComponent<PlayManager>();
     }
 
     // Update is called once per frame
@@ -71,7 +75,7 @@ public class CharacterMovement : MonoBehaviour
         if (isSpeedUp)
         {
             currTime = DateTime.Now.TimeOfDay.Seconds;
-            if(currTime - prevTime >= 5)
+            if(currTime - prevTime >= 4)
             {
                 speedDown();
             }
@@ -80,10 +84,12 @@ public class CharacterMovement : MonoBehaviour
 
         if (isRaceStart)
         {
+            characterAnim.setSpeed(speed);
             currTime = DateTime.Now.TimeOfDay.Seconds;
-            if(currTime - prevTime >= 3)
+            if(currTime - prevTime >= 3 && !isTarget)
             {
                 speed = changeSpeed();
+                //characterAnim.setSpeed(speed);
                 prevTime = currTime;
             }
             transform.Translate(dir * speed * Time.smoothDeltaTime);
@@ -117,8 +123,9 @@ public class CharacterMovement : MonoBehaviour
     public void speedUp()
     {
         isSpeedUp = true;
-        speed = 6f;
+        speed = FAST_SPEED;
         characterAnim.setSpeed(speed);
+        prevTime = DateTime.Now.TimeOfDay.Seconds;
     }
 
     /// <summary>
@@ -127,8 +134,16 @@ public class CharacterMovement : MonoBehaviour
     public void speedDown()
     {
         isSpeedUp = false;
-        speed = 3f;
+        speed = changeSpeed();
         characterAnim.setSpeed(speed);
+    }
+
+    public void speedSlow()
+    {
+        isSpeedUp = true;
+        speed  = UnityEngine.Random.Range(SLOW_MIN_SPEED,SLOW_MAX_SPEED);
+        characterAnim.setSpeed(speed);
+        prevTime = DateTime.Now.TimeOfDay.Seconds;
     }
 
     /// <summary>
@@ -141,10 +156,89 @@ public class CharacterMovement : MonoBehaviour
     }
 
     /// <summary>
-    /// 일정 시간 간격으로 속도 변화 3~4
+    /// 일정 시간 간격으로 속도 변화 DEFAULT_MIN_SPEED~DEAFULT_MAX_SPEED
     /// </summary>
     public float changeSpeed()
     {
-       return UnityEngine.Random.Range(DEFAULT_MIN_SPEED, DEFAULT_MAX_SPEED);
+        return UnityEngine.Random.Range(DEFAULT_MIN_SPEED, DEFAULT_MAX_SPEED);
     }
+
+    /// <summary>
+    /// 충돌 시 발생하는 애니메이션
+    /// </summary>
+    public void playDownAnim()
+    {
+        characterAnim.setIsFallFlat(true);
+        speed = 0;
+    }
+
+    /// <summary>
+    /// 미끄러지는 애니메이션 실행
+    /// </summary>
+    public void playSideFallDown()
+    {
+        characterAnim.setIsSideFallDown(true);
+        speed = 0;
+    }
+
+    /// <summary>
+    /// 탈락 애니메이션 실행
+    /// </summary>
+    public void DropOut()
+    {
+        characterAnim.setDropout(true);
+        speed = 0;
+        isRaceStart = false;
+    }
+
+    /// <summary>
+    /// 현재 이벤트의 타겟인지 지정하는 메소드
+    /// </summary>
+    /// <param name="isTarget">true = 현재 타겟임, false = 타겟이 해제됨</param>
+    public void setIsTarget(bool isTarget)
+    {
+        this.isTarget = isTarget;
+        if (!isTarget)
+        {
+            speed = changeSpeed();
+            characterAnim.setSpeed(speed);
+            characterAnim.transform.Rotate(Vector3.up, -40);
+        }
+           
+    }
+
+    /// <summary>
+    /// 충돌 감지 Enter
+    /// </summary>
+    /// <param name="other"></param>
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isTarget)
+        {
+            switch (other.tag)
+            {
+                case "Roudolph":
+                    playDownAnim();
+                    Destroy(other.gameObject);
+                    break;
+                case "IcyRoad":
+                    playSideFallDown();
+                    Destroy(other.gameObject);
+                    break;
+            }
+
+        }
+
+        if (other.tag.Equals("GasPlanet"))
+        {
+            speedSlow();
+        }
+        if (other.tag.Equals("StonePlanet"))
+        {
+            playManager.AppendDropOut(this);
+            DropOut();
+        }
+
+    }
+
 }

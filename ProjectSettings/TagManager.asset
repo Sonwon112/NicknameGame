@@ -7,6 +7,12 @@ TagManager:
   - SkyboxCamera
   - Manager
   - VirtualCam
+  - Roudolph
+  - IcyRoad
+  - TrackingObject
+  - Actors
+  - GasPlanet
+  - StonePlanet
   layers:
   - Default
   - TransparentFX
@@ -14,11 +20,11 @@ TagManager:
   - PostProcess
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Muse Animate Posing
+  - Muse Animate Baking
+  - Muse Animate Handles
+  - Muse Animate Thumbnail
+  - Muse Animate Environment
   - 
   - 
   - 

@@ -18,6 +18,11 @@ public class CharacterAnim : MonoBehaviour
         
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void extractIdleNum()
     {
         int num = UnityEngine.Random.Range(0, 4);
@@ -42,7 +47,22 @@ public class CharacterAnim : MonoBehaviour
     public void setSpeed(float speed)
     {
         animator.SetFloat("speed", speed);
+        //Debug.Log(animator.GetFloat("speed"));
     }
 
+    public void setIsFallFlat(bool isFallFlat)
+    {
+        animator.SetBool("isFallFlat", isFallFlat);
+    }
+
+    public void setIsSideFallDown(bool isSideFallDown)
+    {
+        animator.SetBool("isSideFallDown", isSideFallDown);
+    }
+
+    public void setDropout(bool isDown)
+    {
+        animator.SetBool("Dropout", isDown);
+    }
 
 }
