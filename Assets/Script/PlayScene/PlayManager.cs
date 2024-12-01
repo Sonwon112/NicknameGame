@@ -42,6 +42,9 @@ public class PlayManager : MonoBehaviour, Manager
     private GameManager gameManager = GameManager.gameManagerInstance;
 
     private CinemachineVirtualCamera movingCam;
+    [Header("BGM")]
+    public AudioSource bgmAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -176,6 +179,7 @@ public class PlayManager : MonoBehaviour, Manager
         {
             CharacterMovement movement = tmp.GetComponent<CharacterMovement>();
             movement.Ready();
+            GetComponent<Sound>().playCountDown();
         }
     }
 
@@ -193,6 +197,7 @@ public class PlayManager : MonoBehaviour, Manager
         virtualCamList[0].Priority = 11;
         virtualCamList[1].Priority = 10;
         PlayRanking.SetActive(true);
+        bgmAudioSource.Play();
     }
 
     /// <summary>
@@ -321,6 +326,14 @@ public class PlayManager : MonoBehaviour, Manager
                 }
                 return;
             }
+        }
+    }
+
+    public void setAllTarget()
+    {
+        foreach (GameObject tmp in participantList)
+        {
+            tmp.GetComponent<CharacterMovement>().setIsTarget(true);
         }
     }
 

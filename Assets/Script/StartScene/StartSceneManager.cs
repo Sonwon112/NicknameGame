@@ -69,6 +69,9 @@ public class StartSceneManager : MonoBehaviour, Manager
         }
     }
 
+    /// <summary>
+    /// 시작하기 누를 경우 서버에 연결 시도
+    /// </summary>
     public void ConnectServer()
     {
         DefaultBtnGroup.SetActive(false);
@@ -91,6 +94,10 @@ public class StartSceneManager : MonoBehaviour, Manager
         });
         connectThread.Start();
     }
+
+    /// <summary>
+    /// 연결 실패 경우 호출되는 메소드
+    /// </summary>
     public void ConnectFailed()
     {
         DefaultBtnGroup.SetActive(true);
@@ -102,6 +109,9 @@ public class StartSceneManager : MonoBehaviour, Manager
         connectThread.Abort();
     }
 
+    /// <summary>
+    /// Default 버튼 그룹을 표시
+    /// </summary>
     public void ShowDefaultGroup()
     {
         LoadingWindow.SetActive(false);
@@ -110,28 +120,43 @@ public class StartSceneManager : MonoBehaviour, Manager
         DefaultBtnGroup.SetActive(true);
     }
 
+    /// <summary>
+    /// 설정 창 표시
+    /// </summary>
     public void ShowSettingWindow()
     {
         SettingWindow.SetActive(true);
         DefaultBtnGroup.SetActive(false);
     }
 
+    /// <summary>
+    /// 설정 창 숨기기
+    /// </summary>
     public void HideSettingWindow()
     {
         ShowDefaultGroup();
     }
 
+    /// <summary>
+    /// 종료 창 표시
+    /// </summary>
     public void ShowExitWindow()
     {
         ExitWindow.SetActive(true);
         DefaultBtnGroup.SetActive(false);
     }
 
+    /// <summary>
+    /// 종료 창 숨기기
+    /// </summary>
     public void HideExitWindow()
     {
         ShowDefaultGroup();
     }
 
+    /// <summary>
+    /// 저장하기 버튼 선택 경우 Json 파일 저장
+    /// </summary>
     public void SaveSetting()
     {
         data.channelId = inputChannelId.text;
@@ -140,11 +165,18 @@ public class StartSceneManager : MonoBehaviour, Manager
         HideSettingWindow();
     }
 
+    /// <summary>
+    /// 나가기 버튼 선택 경우 애플리케이션 종료
+    /// </summary>
     public void ExitGame()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// 서버에서 전송한 메시지에대한 처리를 위한 메소드
+    /// </summary>
+    /// <param name="msg"></param>
     public void gettingMessage(string msg)
     {
         if (msg.Equals("success"))

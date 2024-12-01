@@ -13,16 +13,17 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 dir;
     
     private float speed= 3f;
-    private const float DEFAULT_MIN_SPEED = 4f;
-    private const float DEFAULT_MAX_SPEED = 5f;
-    private const float FAST_SPEED = 8f;
-    private const float SLOW_MIN_SPEED = 1f;
-    private const float SLOW_MAX_SPEED = 2f;
+    private const float DEFAULT_MIN_SPEED = 7f;
+    private const float DEFAULT_MAX_SPEED = 8f;
+    private const float FAST_SPEED = 10f;
+    private const float SLOW_MIN_SPEED = 3f;
+    private const float SLOW_MAX_SPEED = 4f;
 
     private bool isReady = false;
     private bool isRaceStart = false;
     private bool isSpeedUp = false;
     private bool isTarget = false;
+    private bool isShield = false;
     private PlayManager playManager;
 
     private CharacterAnim characterAnim;
@@ -169,6 +170,7 @@ public class CharacterMovement : MonoBehaviour
     public void playDownAnim()
     {
         characterAnim.setIsFallFlat(true);
+        isTarget = true;
         speed = 0;
     }
 
@@ -207,6 +209,13 @@ public class CharacterMovement : MonoBehaviour
            
     }
 
+    private GameObject shield;
+    public void setIsShield(bool isShield, GameObject shieldTmp)
+    {
+        this.isShield = isShield;
+        shield = shieldTmp;
+    }
+
     /// <summary>
     /// 충돌 감지 Enter
     /// </summary>
@@ -224,6 +233,17 @@ public class CharacterMovement : MonoBehaviour
                 case "IcyRoad":
                     playSideFallDown();
                     Destroy(other.gameObject);
+                    break;
+                case "Snowball":
+                    if (isShield)
+                    {
+                        //speedSlow();
+                        isShield = false;
+                        Destroy(other.transform.parent.gameObject);
+                        Destroy(shield);
+                        break;
+                    }
+                    playDownAnim();
                     break;
             }
 

@@ -13,6 +13,8 @@ TagManager:
   - Actors
   - GasPlanet
   - StonePlanet
+  - Snowball
+  - DropBox
   layers:
   - Default
   - TransparentFX

@@ -36,6 +36,7 @@ public class CharacterAnim : MonoBehaviour
 
     public void Ready()
     {
+        transform.rotation = Quaternion.Euler(0, 90, 0);
         animator.SetBool("isReady", true);
     }
 

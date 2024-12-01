@@ -24,7 +24,7 @@ public class CountDown : MonoBehaviour
         if (isStart)
         {
            
-            float currCount = Time.time-prevTime;
+            float currCount = Time.time-prevTime+0.1f;
             int curr = latency-(int)currCount;
             if (curr == -1)
             {
