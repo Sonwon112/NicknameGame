@@ -45,6 +45,12 @@ public class PlayManager : MonoBehaviour, Manager
     [Header("BGM")]
     public AudioSource bgmAudioSource;
 
+
+    public List<GameObject> getParticipantList() 
+    {
+        return participantList;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
