@@ -159,7 +159,7 @@ AudioSource:
   m_GameObject: {fileID: 115941957}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3286576202377675057, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4a61c65057bdff442bfc59db56e662f0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
@@ -2160,6 +2160,14 @@ PrefabInstance:
       propertyPath: eventsList.Array.data[3]
       value: 
       objectReference: {fileID: 1557554984}
+    - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847686}
+    - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMute
+      objectReference: {fileID: 0}
     - target: {fileID: 8223173193064714331, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2197,14 +2205,6 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1918847684}
@@ -2212,26 +2212,6 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1918847686}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: StartGame
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: playBtnSound
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: Sound, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 8965378498501212169, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -3766,7 +3746,7 @@ AudioSource:
   m_GameObject: {fileID: 1918847682}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5278097510449622506, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
   m_audioClip: {fileID: 8300000, guid: 50ca3cba5fe5bb04384983b70797fb9a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
@@ -3865,6 +3845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea9baeff2ffb864c8eeff9fabeabcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AudioMixer: {fileID: 24100000, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
 --- !u!1001 &2004848863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4224,6 +4205,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeleportEvent
       objectReference: {fileID: 0}
+    - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
+      propertyPath: Potal
+      value: 
+      objectReference: {fileID: 7823327091382468809, guid: af0d06ad2f476cc43be23ac0f464a510, type: 3}
+    - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
+      propertyPath: thumbnail
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ce5c437dfa146e479910e8debab83c6, type: 3}
     - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
       propertyPath: PlayManager
       value: 

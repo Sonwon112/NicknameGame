@@ -15,6 +15,7 @@ TagManager:
   - StonePlanet
   - Snowball
   - DropBox
+  - Push
   layers:
   - Default
   - TransparentFX

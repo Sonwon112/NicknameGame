@@ -89,4 +89,8 @@ public class ListManager : MonoBehaviour, Manager
         SceneManager.LoadScene(currListContent.targetSceneIndex);
     }
 
+    public bool getMuteState()
+    {
+        return GetComponent<Sound>().getMuteState();
+    }
 }

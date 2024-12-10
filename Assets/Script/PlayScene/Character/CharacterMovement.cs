@@ -19,17 +19,18 @@ public class CharacterMovement : MonoBehaviour
     private const float SLOW_MIN_SPEED = 3f;
     private const float SLOW_MAX_SPEED = 4f;
 
-    private bool isReady = false;
-    private bool isRaceStart = false;
-    private bool isSpeedUp = false;
-    private bool isTarget = false;
-    private bool isShield = false;
+    private bool isReady = false; // 준비 상태를 위한 bool
+    private bool isRaceStart = false; // 레이스 시작을 알리기 위한 bool
+    private bool isSpeedUp = false; // 속도업 이벤트 시 속도변경을 위한 bool
+    private bool isTarget = false; // 이벤트의 대상임을 인식하기 위한 bool
+    private bool isShield = false; // 방패를 드는 이벤트에서 대상임을 인지하기 위한 bool
+    private bool isPushing = false; // 뒤에서 미는 이벤트에서 효과를 표현하기 위한 bool
     private PlayManager playManager;
 
     private CharacterAnim characterAnim;
 
-    int prevTime;
-    int currTime;
+    double prevTime;
+    double currTime;
 
     // Start is called before the first frame update
     void Start()
@@ -73,9 +74,19 @@ public class CharacterMovement : MonoBehaviour
             }
 
         }*/
+        if (isPushing)
+        {
+            transform.Translate(dir * 20 * Time.deltaTime);
+            currTime = DateTime.Now.TimeOfDay.TotalMilliseconds;
+            if((currTime/1000 - prevTime) >= 1.3)
+            {
+                isPushing = false;
+            }
+        }
+
         if (isSpeedUp)
         {
-            currTime = DateTime.Now.TimeOfDay.Seconds;
+            currTime = DateTime.Now.TimeOfDay.TotalSeconds;
             if(currTime - prevTime >= 4)
             {
                 speedDown();
@@ -86,7 +97,7 @@ public class CharacterMovement : MonoBehaviour
         if (isRaceStart)
         {
             characterAnim.setSpeed(speed);
-            currTime = DateTime.Now.TimeOfDay.Seconds;
+            currTime = DateTime.Now.TimeOfDay.TotalSeconds;
             if(currTime - prevTime >= 3 && !isTarget)
             {
                 speed = changeSpeed();
@@ -95,6 +106,7 @@ public class CharacterMovement : MonoBehaviour
             }
             transform.Translate(dir * speed * Time.smoothDeltaTime);
         }
+
     }
 
     /// <summary>
@@ -103,7 +115,7 @@ public class CharacterMovement : MonoBehaviour
     public void Ready()
     {
         isReady = true;
-        prevTime = DateTime.Now.TimeOfDay.Seconds;
+        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
         characterAnim.Ready();
     }
 
@@ -115,7 +127,7 @@ public class CharacterMovement : MonoBehaviour
         isReady = false;
         isRaceStart = true;
         characterAnim.StartRace();
-        prevTime = DateTime.Now.TimeOfDay.Seconds;
+        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
     }
 
     /// <summary>
@@ -126,7 +138,7 @@ public class CharacterMovement : MonoBehaviour
         isSpeedUp = true;
         speed = FAST_SPEED;
         characterAnim.setSpeed(speed);
-        prevTime = DateTime.Now.TimeOfDay.Seconds;
+        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
     }
 
     /// <summary>
@@ -144,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
         isSpeedUp = true;
         speed  = UnityEngine.Random.Range(SLOW_MIN_SPEED,SLOW_MAX_SPEED);
         characterAnim.setSpeed(speed);
-        prevTime = DateTime.Now.TimeOfDay.Seconds;
+        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
     }
 
     /// <summary>
@@ -209,11 +221,23 @@ public class CharacterMovement : MonoBehaviour
            
     }
 
+    /// <summary>
+    /// 눈이 굴러오는 이벤트에 대한 타켓으로 지정된 상태로 변경
+    /// </summary>
     private GameObject shield;
     public void setIsShield(bool isShield, GameObject shieldTmp)
     {
         this.isShield = isShield;
         shield = shieldTmp;
+    }
+
+    /// <summary>
+    /// 뒤에서 미는 이벤트에서 호출되는 이벤트
+    /// </summary>
+    public void Pushing()
+    {
+        isPushing = true;
+        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
     }
 
     /// <summary>
@@ -244,6 +268,10 @@ public class CharacterMovement : MonoBehaviour
                         break;
                     }
                     playDownAnim();
+                    break;
+                case "Push":
+                    playDownAnim();
+                    Pushing();
                     break;
             }
 

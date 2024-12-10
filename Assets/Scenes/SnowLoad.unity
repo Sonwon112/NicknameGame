@@ -9176,7 +9176,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313387813}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06598953, y: -0.35085163, z: 0.024794579, w: 0.93377393}
+  m_LocalRotation: {x: 0.06598954, y: -0.35085166, z: 0.024794577, w: 0.93377393}
   m_LocalPosition: {x: -117.7, y: 1.51, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20204,7 +20204,11 @@ PrefabInstance:
     - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
       propertyPath: Potal
       value: 
-      objectReference: {fileID: 6833091242126614694, guid: 0eaa7b9e46ce9ec449e53f45d9bb9a99, type: 3}
+      objectReference: {fileID: 7823327091382468809, guid: af0d06ad2f476cc43be23ac0f464a510, type: 3}
+    - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
+      propertyPath: thumbnail
+      value: 
+      objectReference: {fileID: 21300000, guid: 9ce5c437dfa146e479910e8debab83c6, type: 3}
     - target: {fileID: 6286751713559133214, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
       propertyPath: PlayManager
       value: 
@@ -45229,7 +45233,7 @@ AudioSource:
   m_GameObject: {fileID: 1918847682}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5278097510449622506, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
   m_audioClip: {fileID: 8300000, guid: 50ca3cba5fe5bb04384983b70797fb9a, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.6
@@ -45328,6 +45332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea9baeff2ffb864c8eeff9fabeabcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_AudioMixer: {fileID: 24100000, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
 --- !u!1 &1924786844
 GameObject:
   m_ObjectHideFlags: 0
@@ -46401,7 +46406,7 @@ AudioSource:
   m_GameObject: {fileID: 1952804250}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -3286576202377675057, guid: 50138d6316ab96d4587aab43d1e30289, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8bed02c17e403f34da68b9c0b5736090, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.8
@@ -51006,7 +51011,7 @@ PrefabInstance:
       objectReference: {fileID: 1209602635}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.size
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[0]
@@ -51019,19 +51024,27 @@ PrefabInstance:
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[2]
       value: 
-      objectReference: {fileID: 524670226}
+      objectReference: {fileID: 1259669950}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[3]
       value: 
-      objectReference: {fileID: 1259669950}
+      objectReference: {fileID: 1228551302}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[4]
       value: 
-      objectReference: {fileID: 1228551302}
+      objectReference: {fileID: 786324391}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[5]
       value: 
       objectReference: {fileID: 786324391}
+    - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847686}
+    - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMute
+      objectReference: {fileID: 0}
     - target: {fileID: 8211471459553263891, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

@@ -343,4 +343,9 @@ public class PlayManager : MonoBehaviour, Manager
         }
     }
 
+    public bool getMuteState()
+    {
+        return GetComponent<Sound>().getMuteState();
+    }
+
 }

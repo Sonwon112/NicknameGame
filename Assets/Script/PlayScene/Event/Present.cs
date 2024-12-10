@@ -17,7 +17,7 @@ public class Present : MonoBehaviour
 
     private float prevTime = 0f;
     private float currTime = 0f;
-    private float term = 1f;
+    private float term = 2f;
     private bool countDown = false;
 
 

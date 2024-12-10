@@ -189,6 +189,10 @@ public class StartSceneManager : MonoBehaviour, Manager
         }
     }
 
+    public bool getMuteState()
+    {
+        return GetComponent<Sound>().getMuteState();
+    }
 
 }
 
