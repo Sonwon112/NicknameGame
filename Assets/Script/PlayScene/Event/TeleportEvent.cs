@@ -7,6 +7,7 @@ public class TeleportEvent : Event
 {
     public GameObject Potal;
     public PlayManager PlayManager;
+    public GameObject particle;
 
     private GameObject target1;
     private GameObject target2;
@@ -44,8 +45,12 @@ public class TeleportEvent : Event
                 target2.transform.position = target1.transform.position;
                 target1.transform.position = tmpPos;
                 isTeleport = false;
+                GameObject pTmp1 = Instantiate(particle, target1.transform);
+                GameObject pTmp2 = Instantiate(particle, target2.transform);
                 Destroy(potal1);
                 Destroy(potal2);
+                Destroy(pTmp1, 2f);
+                Destroy(pTmp2, 2f);
             }
         }
     }

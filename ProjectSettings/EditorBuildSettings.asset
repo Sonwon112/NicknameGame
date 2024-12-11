@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpaceLoad.unity
     guid: f5bf6f041f8b0604a90fabbddaa8d356
+  - enabled: 1
+    path: Assets/Scenes/ChirstamasRoomLoad.unity
+    guid: 90a8101ed088e2e4098335b2b08ce9be
   m_configObjects: {}

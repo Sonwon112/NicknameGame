@@ -551,6 +551,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -607,6 +614,7 @@ Transform:
   - {fileID: 122520310}
   - {fileID: 1251164594}
   - {fileID: 1557554985}
+  - {fileID: 1544987948}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &360671260 stripped
@@ -1982,6 +1990,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2142,7 +2157,7 @@ PrefabInstance:
       objectReference: {fileID: 1209602635}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[0]
@@ -2159,7 +2174,19 @@ PrefabInstance:
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: eventsList.Array.data[3]
       value: 
-      objectReference: {fileID: 1557554984}
+      objectReference: {fileID: 1544987947}
+    - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: eventsList.Array.data[4]
+      value: 
+      objectReference: {fileID: 1544987947}
+    - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: eventsList.Array.data[5]
+      value: 
+      objectReference: {fileID: 1544987947}
+    - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: eventsList.Array.data[6]
+      value: 
+      objectReference: {fileID: 1544987947}
     - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3020,6 +3047,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3076,6 +3110,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3243,6 +3284,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   standard: {fileID: 243787207}
   speed: 60
+--- !u!1 &1544987947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544987948}
+  - component: {fileID: 1544987949}
+  m_Layer: 0
+  m_Name: RocketEvent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1544987948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544987947}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 347453686}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1544987949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544987947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4297a8ed6d612498eabd57068ae388, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thumbnail: {fileID: 0}
+  eventName: "\uC9C0\uB098\uAC11\uB2C8\uB2E4~"
+  targetcnt: 1
+  Roudolph: {fileID: 8854619882081110099, guid: 6ace0503f5f5e6e44831975f9aeed05d, type: 3}
+  pos: {x: -10, y: 0, z: 0}
+  angle: {x: 0, y: 180, z: 90}
 --- !u!1 &1557554984 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 240353025788608863, guid: f26d942911955c943a22ade883cf6e4c, type: 3}
