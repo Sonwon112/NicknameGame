@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731bf98bf00ef4344997ff3b320cb62b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
+  thumbnail: {fileID: 21300000, guid: 9b7d4a97702b90143ab1d6497baf5ffa, type: 3}
   eventName: "\uD3EC\uD06C \uC8FC\uC758!"
   targetcnt: 1
   Fork: {fileID: 4458320275869111032, guid: d1b9e161fe536754996635b7f303dbc8, type: 3}

@@ -21,7 +21,7 @@ public class StartSceneManager : MonoBehaviour, Manager
 
     public TMP_InputField inputChannelId;
 
-    private SettingData data;
+    private SettingData data = SettingData.instance;
     private string settingText;
     private const string fileName = "settingData.json";
     private string path;
@@ -38,12 +38,12 @@ public class StartSceneManager : MonoBehaviour, Manager
         {
             settingText = File.ReadAllText(path);
             if (settingText == null) Debug.LogWarning("리소스 로드 실패");
-            data = JsonUtility.FromJson<SettingData>(settingText.ToString());
+            data.setSetting(JsonUtility.FromJson<SettingData>(settingText.ToString()));
             inputChannelId.text = data.channelId;
         }
         else
         {
-            data = new SettingData("0niyaNicknameGame", "", 80);
+            data = new SettingData("0niyaNicknameGame", "", 80, 80, 80);
             string dataToJson = JsonUtility.ToJson(data);
             File.WriteAllText(path, dataToJson);
         }
@@ -198,14 +198,29 @@ public class StartSceneManager : MonoBehaviour, Manager
 
 public class SettingData
 {
+    public static SettingData instance = new SettingData();
     public string token;
     public string channelId;
-    public int volume;
+    public int masterVolume;
+    public int bgmVolume;
+    public int sfxVolume;
 
-    public SettingData(string token, string channelId, int volume)
+    public SettingData(){}
+    public SettingData(string token, string channelId, int masterVolume, int bgmVolume, int sfxVolume)
     {
         this.token = token;
         this.channelId = channelId;
-        this.volume = volume;
+        this.masterVolume = masterVolume;
+        this.sfxVolume = sfxVolume;
+        this.bgmVolume = bgmVolume;
+    }
+
+    public void setSetting(SettingData data)
+    {
+        token = data.token;
+        channelId = data.channelId;
+        masterVolume = data.masterVolume;
+        sfxVolume = data.sfxVolume;
+        bgmVolume = data.bgmVolume;
     }
 }

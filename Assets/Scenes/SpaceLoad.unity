@@ -3328,8 +3328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4297a8ed6d612498eabd57068ae388, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thumbnail: {fileID: 0}
-  eventName: "\uC9C0\uB098\uAC11\uB2C8\uB2E4~"
+  thumbnail: {fileID: 21300000, guid: 6c8a0cbf5bd97a542b6f93800a0bd6e2, type: 3}
+  eventName: "\uC9C0\uB098\uAC11\uB2C8\uB2E4"
   targetcnt: 1
   Roudolph: {fileID: 8854619882081110099, guid: 6ace0503f5f5e6e44831975f9aeed05d, type: 3}
   pos: {x: -10, y: 0, z: 0}
