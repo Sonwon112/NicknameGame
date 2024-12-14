@@ -1289,6 +1289,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2874,6 +2881,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3001,6 +3015,26 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -360
       objectReference: {fileID: 0}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847685}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: HideSettingWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6423483933215550291, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_Name
       value: PlaySceneCanvas
@@ -3037,6 +3071,26 @@ PrefabInstance:
       propertyPath: eventsList.Array.data[5]
       value: 
       objectReference: {fileID: 1443280942}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847685}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: HideSettingWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3074,6 +3128,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+--- !u!1 &1180665377 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8364502759195203191, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+  m_PrefabInstance: {fileID: 1180665376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1205593476 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 569173036031716114, guid: 2c9cf8f2a99da33459a2acdf96ea7e87, type: 3}
@@ -3986,6 +4045,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4125,6 +4191,13 @@ MonoBehaviour:
     GateFit: 2
     FocusDistance: 10
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4279,6 +4352,8 @@ MonoBehaviour:
   eventName: "\uB8E8\uB3CC\uD504"
   targetcnt: 1
   Roudolph: {fileID: 8090162609743615452, guid: 5e660dd60cadcaf41a2603a3ac3b52c1, type: 3}
+  pos: {x: -10, y: 2, z: 0}
+  angle: {x: 0, y: 90, z: 0}
 --- !u!1 &1445408210
 GameObject:
   m_ObjectHideFlags: 0
@@ -5767,6 +5842,7 @@ MonoBehaviour:
   txtCount: {fileID: 942644290}
   PlayRanking: {fileID: 84722496}
   EndRankingObj: {fileID: 1841701550}
+  settingWindow: {fileID: 1180665377}
   EventCard: {fileID: 2108711311}
   isStart: 0
   isReady: 0

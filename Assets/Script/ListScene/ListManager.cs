@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ListManager : MonoBehaviour, Manager
 {
     public ParticipantWindow participantWindow;
+    public GameObject settingWindow;
     private ListContent currListContent;
 
     private bool canPart = false;
@@ -31,6 +32,11 @@ public class ListManager : MonoBehaviour, Manager
         {
             participantWindow.AppendParticipant(appednNickname);
             callAppend = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowSettingWindow();
+            settingWindow.GetComponent<SettingWindow>().SavePrevSetting();
         }
     }
 
@@ -93,4 +99,15 @@ public class ListManager : MonoBehaviour, Manager
     {
         return GetComponent<Sound>().getMuteState();
     }
+
+    public void ShowSettingWindow()
+    {
+        settingWindow.SetActive(true);
+    }
+
+    public void HideSettingWindow()
+    {
+        settingWindow.SetActive(false);
+    }
+
 }

@@ -19,34 +19,16 @@ public class StartSceneManager : MonoBehaviour, Manager
 
     public GameManager gameManager;
 
-    public TMP_InputField inputChannelId;
-
-    private SettingData data = SettingData.instance;
-    private string settingText;
-    private const string fileName = "settingData.json";
-    private string path;
-    private Thread connectThread;
-
     public static bool connectFaild = false;
     public static bool LoadNextScene = false;
+
+    private SettingData data = SettingData.instance;
+    private Thread connectThread;
 
     // Start is called before the first frame update
     void Start()
     {
-        path = Path.Combine(Application.streamingAssetsPath, fileName);
-        if (File.Exists(path))
-        {
-            settingText = File.ReadAllText(path);
-            if (settingText == null) Debug.LogWarning("리소스 로드 실패");
-            data.setSetting(JsonUtility.FromJson<SettingData>(settingText.ToString()));
-            inputChannelId.text = data.channelId;
-        }
-        else
-        {
-            data = new SettingData("0niyaNicknameGame", "", 80, 80, 80);
-            string dataToJson = JsonUtility.ToJson(data);
-            File.WriteAllText(path, dataToJson);
-        }
+        
 
         /*Debug.Log(settingText.ToString());
         Debug.Log(data.token);
@@ -155,17 +137,6 @@ public class StartSceneManager : MonoBehaviour, Manager
     }
 
     /// <summary>
-    /// 저장하기 버튼 선택 경우 Json 파일 저장
-    /// </summary>
-    public void SaveSetting()
-    {
-        data.channelId = inputChannelId.text;
-        string dataToJson = JsonUtility.ToJson(data);
-        File.WriteAllText(path, dataToJson);
-        HideSettingWindow();
-    }
-
-    /// <summary>
     /// 나가기 버튼 선택 경우 애플리케이션 종료
     /// </summary>
     public void ExitGame()
@@ -196,31 +167,3 @@ public class StartSceneManager : MonoBehaviour, Manager
 
 }
 
-public class SettingData
-{
-    public static SettingData instance = new SettingData();
-    public string token;
-    public string channelId;
-    public int masterVolume;
-    public int bgmVolume;
-    public int sfxVolume;
-
-    public SettingData(){}
-    public SettingData(string token, string channelId, int masterVolume, int bgmVolume, int sfxVolume)
-    {
-        this.token = token;
-        this.channelId = channelId;
-        this.masterVolume = masterVolume;
-        this.sfxVolume = sfxVolume;
-        this.bgmVolume = bgmVolume;
-    }
-
-    public void setSetting(SettingData data)
-    {
-        token = data.token;
-        channelId = data.channelId;
-        masterVolume = data.masterVolume;
-        sfxVolume = data.sfxVolume;
-        bgmVolume = data.bgmVolume;
-    }
-}

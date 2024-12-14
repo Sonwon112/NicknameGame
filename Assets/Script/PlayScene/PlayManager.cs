@@ -27,6 +27,7 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject txtCount;
     public GameObject PlayRanking;
     public GameObject EndRankingObj;
+    public GameObject settingWindow;
 
     [Header("Header")]
     public EventCard EventCard;
@@ -146,8 +147,14 @@ public class PlayManager : MonoBehaviour, Manager
             {
                 setCam(0);
             }
-            
-            
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowSettingWindow();
+            settingWindow.GetComponent<SettingWindow>().SavePrevSetting();
+            Time.timeScale = 0;
+            GetComponent<AudioSource>().Pause();
         }
     }
 
@@ -346,6 +353,18 @@ public class PlayManager : MonoBehaviour, Manager
     public bool getMuteState()
     {
         return GetComponent<Sound>().getMuteState();
+    }
+
+    public void ShowSettingWindow()
+    {
+        settingWindow.SetActive(true);
+    }
+
+    public void HideSettingWindow()
+    {
+        settingWindow.SetActive(false);
+        Time.timeScale = 1;
+        GetComponent<AudioSource>().Play();
     }
 
 }

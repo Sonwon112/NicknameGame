@@ -5812,6 +5812,7 @@ MonoBehaviour:
   txtCount: {fileID: 1277031647}
   PlayRanking: {fileID: 1751682510}
   EndRankingObj: {fileID: 463212283}
+  settingWindow: {fileID: 7291707889585120497}
   EventCard: {fileID: 1644088118}
   isStart: 0
   isReady: 0
@@ -6628,6 +6629,26 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1918847684}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847686}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: HideSettingWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5909486682527787719, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6095147381574724219, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_text
       value: '?'
@@ -6692,6 +6713,30 @@ PrefabInstance:
       propertyPath: eventsList.Array.data[8]
       value: 
       objectReference: {fileID: 203613543}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847686}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideSettingWindow
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7624346221489402176, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: Sound, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7855235803484655561, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6793,6 +6838,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+--- !u!1 &7291707889585120497 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8364502759195203191, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+  m_PrefabInstance: {fileID: 7291707889585120496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8263758005054311951
 PrefabInstance:
   m_ObjectHideFlags: 0
