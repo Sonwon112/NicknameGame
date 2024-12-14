@@ -42,6 +42,10 @@ public class EndPosition : MonoBehaviour
             CharacterMovement participant = other.GetComponent<CharacterMovement>();
             playManager.AppendRank(participant);
             
-        }   
+        }
+        if(other.tag.Equals("Santa"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

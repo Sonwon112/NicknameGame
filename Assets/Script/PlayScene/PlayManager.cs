@@ -17,7 +17,7 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject EndPosition;
 
     [Header("Cinemachine")]
-    public List<CinemachineVirtualCamera> virtualCamList = new List<CinemachineVirtualCamera>(); // 0 : defaultCam, 1 : countCam, 2 : movingCam;
+    public List<CinemachineVirtualCamera> virtualCamList = new List<CinemachineVirtualCamera>(); // 0 : defaultCam, 1 : countCam, 2 : movingCam, 3 : endPositionCam
 
     public CinemachineDollyCart cart;
     public CinemachineTargetGroup targetGroup;
@@ -27,16 +27,31 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject txtCount;
     public GameObject PlayRanking;
     public GameObject EndRankingObj;
+    public GameObject settingWindow;
+
+    [Header("Header")]
+    public EventCard EventCard;
     
     private List<string> nicknameList = new List<string>();
     private List<GameObject> participantList = new List<GameObject> ();
 
     private List<GameObject> RankinListObject = new List<GameObject> ();
     private List<string> ResultRankingList = new List<string>();
+    private List<string> DropOutRankingList = new List<string>();
     public bool isStart;
+    public bool isReady = false;
     private GameManager gameManager = GameManager.gameManagerInstance;
 
     private CinemachineVirtualCamera movingCam;
+    [Header("BGM")]
+    public AudioSource bgmAudioSource;
+
+
+    public List<GameObject> getParticipantList() 
+    {
+        return participantList;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -130,22 +145,33 @@ public class PlayManager : MonoBehaviour, Manager
             // 캠 그룹표시
             if(Input.GetKeyDown(KeyCode.Alpha2))
             {
-                setDefaultCam();
+                setCam(0);
             }
-            
-            
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowSettingWindow();
+            settingWindow.GetComponent<SettingWindow>().SavePrevSetting();
+            Time.timeScale = 0;
+            GetComponent<AudioSource>().Pause();
         }
     }
 
-
-    public void setDefaultCam()
+    /// <summary>
+    /// 현재 송출할 Cinemachine VirtualCamera를 설정
+    /// </summary>
+    /// <param name="index">VirtualCamera List 인덱스</param>
+    public void setCam(int index)
     {
         CameraReset();
         movingCam.gameObject.GetComponent<MovingCam>().ToggleMovement(false);
-        virtualCamList[0].Priority = 11;
+        virtualCamList[index].Priority = 11;
     }
 
-
+    /// <summary>
+    /// 게임 시작 메소드
+    /// </summary>
     public void StartGame()
     {
         txtCount.SetActive(true);
@@ -154,16 +180,25 @@ public class PlayManager : MonoBehaviour, Manager
         virtualCamList[0].Priority = 10;
         virtualCamList[1].Priority = 11;
         cart.m_Speed = 5;
+        isReady = true;
     }
+
+    /// <summary>
+    /// 시작 버튼 클릭 시 레이스를 준비 상태로 전환하는 메소드
+    /// </summary>
     public void raceReady()
     {
         foreach (GameObject tmp in participantList)
         {
             CharacterMovement movement = tmp.GetComponent<CharacterMovement>();
             movement.Ready();
+            GetComponent<Sound>().playCountDown();
         }
     }
 
+    /// <summary>
+    /// 준비 상태 후 실제로 경주를 시작하게하는 메소드
+    /// </summary>
     public void raceStart()
     {
         isStart = true;
@@ -175,16 +210,25 @@ public class PlayManager : MonoBehaviour, Manager
         virtualCamList[0].Priority = 11;
         virtualCamList[1].Priority = 10;
         PlayRanking.SetActive(true);
+        bgmAudioSource.Play();
     }
 
+    /// <summary>
+    /// GameManager에서 Manager로 메시지를 전송할 때 사용
+    /// </summary>
+    /// <param name="msg">GameManager가 전송할 메시지</param>
     public void gettingMessage(string msg)
     {
 
     }
 
+    /// <summary>
+    /// 종료지점 도착시 랭킹에 닉네임을 추가하는 메소드
+    /// </summary>
+    /// <param name="participant">추가할 참여자 객체</param>
     public void AppendRank(CharacterMovement participant)
     {
-        if (virtualCamList[0].Priority == 10) setDefaultCam();
+        if (virtualCamList[3].Priority == 10) setCam(3);
         string rankNickname = participant.NicknameText.text;
         ResultRankingList.Add(rankNickname);
         foreach(GameObject tmp in participantList)
@@ -197,6 +241,7 @@ public class PlayManager : MonoBehaviour, Manager
                 if(participantList.Count <= 0)
                 {
                     isStart=false;
+                    ResultRankingList.AddRange(DropOutRankingList);
                     EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
                     EndRankingObj.SetActive(true) ;
                     PlayRanking.SetActive(false);
@@ -206,6 +251,10 @@ public class PlayManager : MonoBehaviour, Manager
         }
     }
 
+    /// <summary>
+    /// 화면에 송출할 랭킹 지정
+    /// </summary>
+    /// <param name="rankingList">화면에 송출할 top 10 닉네임 리스트</param>
     public void setRankingList(List<string> rankingList)
     {
         List<string> tmp = new List<string>();
@@ -219,11 +268,18 @@ public class PlayManager : MonoBehaviour, Manager
         tmp.Clear();
     }
     
+    /// <summary>
+    /// 경기 종료 후 리스트 맵으로 이동하는 메소드
+    /// </summary>
     public void outMap()
     {
         SceneManager.LoadScene(1);
     }
 
+    /// <summary>
+    /// 실시간 랭킹 선택시 해당 플레이어의 VirtualCam으로 이동하기 위해서 Cam을 찾고 Priority를 지정하는 메소드
+    /// </summary>
+    /// <param name="nickname"> 찾을 플레이어의 이름 </param>
     public void findPlayerCam(TMP_Text nickname)
     {
         foreach(GameObject tmp in participantList)
@@ -236,7 +292,9 @@ public class PlayManager : MonoBehaviour, Manager
             }
         }
     }
-
+    /// <summary>
+    /// 카메라 전환 과정에서 특정하기 어려울 경우 카메라 전부의 priority를 10으로 전환하는 메소드
+    /// </summary>
     public void CameraReset()
     {
         GameObject[] virtualCam = GameObject.FindGameObjectsWithTag("VirtualCam");
@@ -245,4 +303,68 @@ public class PlayManager : MonoBehaviour, Manager
             tmp.GetComponent<CinemachineVirtualCamera>().Priority = 10;
         }
     }
+
+    /// <summary>
+    ///  EventZone에 닿은 경우 카드 및 대상을 뽑기 위해 호출하는 메소드(게임도 일시정지됨)
+    /// </summary>
+    public void DrawEvent()
+    {
+        Time.timeScale = 0;
+        EventCard.OpenCard(participantList);
+    }
+
+    /// <summary>
+    /// 탈락 이벤트 발생시 탈락자 리스트에 전달받은 참여자를 추가
+    /// </summary>
+    /// <param name="target"></param>
+    public void AppendDropOut(CharacterMovement participant)
+    {
+        string rankNickname = participant.NicknameText.text;
+        
+        foreach (GameObject tmp in participantList)
+        {
+            if (tmp.GetComponent<CharacterMovement>().NicknameText.text == rankNickname)
+            {
+                DropOutRankingList.Insert(0, rankNickname);
+                participantList.Remove(tmp);
+                //Destroy(participant.gameObject);
+
+                if (participantList.Count <= 0)
+                {
+                    isStart = false;
+                    ResultRankingList.AddRange(DropOutRankingList);
+                    EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
+                    EndRankingObj.SetActive(true);
+                    PlayRanking.SetActive(false);
+                }
+                return;
+            }
+        }
+    }
+
+    public void setAllTarget()
+    {
+        foreach (GameObject tmp in participantList)
+        {
+            tmp.GetComponent<CharacterMovement>().setIsTarget(true);
+        }
+    }
+
+    public bool getMuteState()
+    {
+        return GetComponent<Sound>().getMuteState();
+    }
+
+    public void ShowSettingWindow()
+    {
+        settingWindow.SetActive(true);
+    }
+
+    public void HideSettingWindow()
+    {
+        settingWindow.SetActive(false);
+        Time.timeScale = 1;
+        GetComponent<AudioSource>().Play();
+    }
+
 }

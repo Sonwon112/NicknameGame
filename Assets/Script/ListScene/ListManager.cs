@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ListManager : MonoBehaviour, Manager
 {
     public ParticipantWindow participantWindow;
+    public GameObject settingWindow;
     private ListContent currListContent;
 
     private bool canPart = false;
@@ -17,7 +18,11 @@ public class ListManager : MonoBehaviour, Manager
     // Start is called before the first frame update
     void Start()
     {
-        gameManager.setSceneManager(this);
+        if(gameManager != null)
+        {
+            gameManager.setSceneManager(this);
+            gameManager.ResetParticipantList();
+        }
     }
 
     // Update is called once per frame
@@ -27,6 +32,11 @@ public class ListManager : MonoBehaviour, Manager
         {
             participantWindow.AppendParticipant(appednNickname);
             callAppend = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowSettingWindow();
+            settingWindow.GetComponent<SettingWindow>().SavePrevSetting();
         }
     }
 
@@ -75,13 +85,29 @@ public class ListManager : MonoBehaviour, Manager
     {
         participantWindow.gameObject.SetActive(false);
         participantWindow.ClearParticiapnt();
-        gameManager.Send(NetworkingType.RESET.ToString(), "closing window reset");
+        gameManager.Send(NetworkingType.PERMIT.ToString(), "stop");
+        participantWindow.ToggleParticipant(false);
         gameManager.ResetParticipantList();
     }
 
     public void OpenMap()
     {
         SceneManager.LoadScene(currListContent.targetSceneIndex);
+    }
+
+    public bool getMuteState()
+    {
+        return GetComponent<Sound>().getMuteState();
+    }
+
+    public void ShowSettingWindow()
+    {
+        settingWindow.SetActive(true);
+    }
+
+    public void HideSettingWindow()
+    {
+        settingWindow.SetActive(false);
     }
 
 }

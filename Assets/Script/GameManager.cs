@@ -177,6 +177,7 @@ public class GameManager : MonoBehaviour
     public void ResetParticipantList()
     {
         participantList.Clear();
+        Send(NetworkingType.RESET.ToString(), "call Reset List");
     }
 
     /// <summary>

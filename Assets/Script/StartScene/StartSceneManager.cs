@@ -19,34 +19,16 @@ public class StartSceneManager : MonoBehaviour, Manager
 
     public GameManager gameManager;
 
-    public TMP_InputField inputChannelId;
-
-    private SettingData data;
-    private string settingText;
-    private const string fileName = "settingData.json";
-    private string path;
-    private Thread connectThread;
-
     public static bool connectFaild = false;
     public static bool LoadNextScene = false;
+
+    private SettingData data = SettingData.instance;
+    private Thread connectThread;
 
     // Start is called before the first frame update
     void Start()
     {
-        path = Path.Combine(Application.streamingAssetsPath, fileName);
-        if (File.Exists(path))
-        {
-            settingText = File.ReadAllText(path);
-            if (settingText == null) Debug.LogWarning("리소스 로드 실패");
-            data = JsonUtility.FromJson<SettingData>(settingText.ToString());
-            inputChannelId.text = data.channelId;
-        }
-        else
-        {
-            data = new SettingData("0niyaNicknameGame", "", 80);
-            string dataToJson = JsonUtility.ToJson(data);
-            File.WriteAllText(path, dataToJson);
-        }
+        
 
         /*Debug.Log(settingText.ToString());
         Debug.Log(data.token);
@@ -69,6 +51,9 @@ public class StartSceneManager : MonoBehaviour, Manager
         }
     }
 
+    /// <summary>
+    /// 시작하기 누를 경우 서버에 연결 시도
+    /// </summary>
     public void ConnectServer()
     {
         DefaultBtnGroup.SetActive(false);
@@ -91,6 +76,10 @@ public class StartSceneManager : MonoBehaviour, Manager
         });
         connectThread.Start();
     }
+
+    /// <summary>
+    /// 연결 실패 경우 호출되는 메소드
+    /// </summary>
     public void ConnectFailed()
     {
         DefaultBtnGroup.SetActive(true);
@@ -102,6 +91,9 @@ public class StartSceneManager : MonoBehaviour, Manager
         connectThread.Abort();
     }
 
+    /// <summary>
+    /// Default 버튼 그룹을 표시
+    /// </summary>
     public void ShowDefaultGroup()
     {
         LoadingWindow.SetActive(false);
@@ -110,41 +102,52 @@ public class StartSceneManager : MonoBehaviour, Manager
         DefaultBtnGroup.SetActive(true);
     }
 
+    /// <summary>
+    /// 설정 창 표시
+    /// </summary>
     public void ShowSettingWindow()
     {
         SettingWindow.SetActive(true);
         DefaultBtnGroup.SetActive(false);
     }
 
+    /// <summary>
+    /// 설정 창 숨기기
+    /// </summary>
     public void HideSettingWindow()
     {
         ShowDefaultGroup();
     }
 
+    /// <summary>
+    /// 종료 창 표시
+    /// </summary>
     public void ShowExitWindow()
     {
         ExitWindow.SetActive(true);
         DefaultBtnGroup.SetActive(false);
     }
 
+    /// <summary>
+    /// 종료 창 숨기기
+    /// </summary>
     public void HideExitWindow()
     {
         ShowDefaultGroup();
     }
 
-    public void SaveSetting()
-    {
-        data.channelId = inputChannelId.text;
-        string dataToJson = JsonUtility.ToJson(data);
-        File.WriteAllText(path, dataToJson);
-        HideSettingWindow();
-    }
-
+    /// <summary>
+    /// 나가기 버튼 선택 경우 애플리케이션 종료
+    /// </summary>
     public void ExitGame()
     {
         Application.Quit();
     }
 
+    /// <summary>
+    /// 서버에서 전송한 메시지에대한 처리를 위한 메소드
+    /// </summary>
+    /// <param name="msg"></param>
     public void gettingMessage(string msg)
     {
         if (msg.Equals("success"))
@@ -157,19 +160,10 @@ public class StartSceneManager : MonoBehaviour, Manager
         }
     }
 
-
-}
-
-public class SettingData
-{
-    public string token;
-    public string channelId;
-    public int volume;
-
-    public SettingData(string token, string channelId, int volume)
+    public bool getMuteState()
     {
-        this.token = token;
-        this.channelId = channelId;
-        this.volume = volume;
+        return GetComponent<Sound>().getMuteState();
     }
+
 }
+
