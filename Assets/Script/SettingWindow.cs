@@ -49,13 +49,19 @@ public class SettingWindow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ReadData();
+        SettingValue();
+    }
+
+    public void ReadData()
+    {
         path = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(path))
         {
             settingText = File.ReadAllText(path);
             if (settingText == null) Debug.LogWarning("리소스 로드 실패");
             settingData.setSetting(JsonUtility.FromJson<SettingData>(settingText.ToString()));
-            if(usingChannelInput)
+            if (usingChannelInput)
                 inputChannelId.text = settingData.channelId;
         }
         else
@@ -64,13 +70,9 @@ public class SettingWindow : MonoBehaviour
             string dataToJson = JsonUtility.ToJson(settingData);
             File.WriteAllText(path, dataToJson);
         }
-
-
         m_AuidoMixer.SetFloat(masterName, settingData.masterVolume);
         m_AuidoMixer.SetFloat(bgmName, settingData.bgmVolume);
         m_AuidoMixer.SetFloat(sfxName, settingData.sfxVolume);
-
-        SettingValue();
     }
 
     private void OnEnable()

@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private string ip = "127.0.0.1";
+    //private string ip = "127.0.0.1"; // testIp
+    private string ip = "146.56.102.79";
     private string port = "8080";
 
     private string serviceName = "/connect";
@@ -37,12 +38,6 @@ public class GameManager : MonoBehaviour
         sceneManager = GameObject.FindGameObjectWithTag("Manager").GetComponent<Manager>();
     }
 
-    private void Update()
-    {
-        
-    }
-
-    
     /// <summary>
     /// 참여자 리스트 getter
     /// </summary>

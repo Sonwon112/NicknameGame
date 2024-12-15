@@ -2919,6 +2919,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778437195050368480, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1729931145681546076, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2266336907236472905, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3747278299813383584, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3852557612412224059, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4042359529902763924, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_text
+      value: "\uBAA9\uB85D\uC73C\uB85C"
+      objectReference: {fileID: 0}
     - target: {fileID: 4392101290324024582, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -3039,6 +3063,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlaySceneCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6423483933215550291, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847685}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: outMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: Fanfare
       value: 
@@ -3103,6 +3151,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1918847685}
+    - target: {fileID: 8349937327261988145, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8364502759195203191, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8741591766924040166, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

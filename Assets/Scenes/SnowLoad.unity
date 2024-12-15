@@ -9275,7 +9275,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313387813}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06598954, y: -0.35085166, z: 0.024794577, w: 0.93377393}
+  m_LocalRotation: {x: 0.06598953, y: -0.35085163, z: 0.024794579, w: 0.93377393}
   m_LocalPosition: {x: -117.7, y: 1.51, z: -8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -50914,6 +50914,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1918847684}
+    - target: {fileID: 4042359529902763924, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_text
+      value: "\uBAA9\uB85D\uC73C\uB85C"
+      objectReference: {fileID: 0}
     - target: {fileID: 4392101290324024582, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -51053,6 +51057,26 @@ PrefabInstance:
     - target: {fileID: 6423483933215550291, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: m_Name
       value: PlaySceneCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1918847686}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1918847684}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: playBtnSound
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: outMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 6599157517503459816, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlayManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 6676836160718139177, guid: d71baaa17b751b54788d05465b2cd1dc, type: 3}
       propertyPath: Fanfare

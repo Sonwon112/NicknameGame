@@ -21,6 +21,7 @@ public class TeleportEvent : Event
     public override void playEvent(CharacterMovement target)
     {
         List<GameObject> list = PlayManager.getParticipantList();
+        list.Remove(target.gameObject);
 
         int targetIndex = UnityEngine.Random.Range(0, list.Count);
 
