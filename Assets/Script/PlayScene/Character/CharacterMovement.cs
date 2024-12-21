@@ -273,6 +273,10 @@ public class CharacterMovement : MonoBehaviour
                     playDownAnim();
                     Pushing();
                     break;
+                case "Cookie":
+                    other.GetComponent<CookieInstance>().CallDestroy();
+                    playDownAnim();
+                    break;
             }
 
         }
@@ -287,6 +291,11 @@ public class CharacterMovement : MonoBehaviour
             DropOut();
         }
 
+    }
+
+    public void setBlackFontColor()
+    {
+        NicknameText.color = Color.black;
     }
 
 }

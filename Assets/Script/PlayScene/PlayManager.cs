@@ -28,6 +28,7 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject PlayRanking;
     public GameObject EndRankingObj;
     public GameObject settingWindow;
+    public bool fontIsBlack = false;
 
     [Header("Header")]
     public EventCard EventCard;
@@ -64,17 +65,10 @@ public class PlayManager : MonoBehaviour, Manager
         else
         {
             //test
-            nicknameList.Add("test1");
-            nicknameList.Add("test2");
-            nicknameList.Add("test3");
-            nicknameList.Add("test4");
-            nicknameList.Add("test5");
-            nicknameList.Add("test6");
-            nicknameList.Add("test7");
-            nicknameList.Add("test8");
-            nicknameList.Add("test9");
-            nicknameList.Add("test10");
-            nicknameList.Add("test11");
+            for(int i = 1; i < 120;  i++)
+            {
+                nicknameList.Add("test"+i);
+            }
         }
 
 
@@ -98,6 +92,7 @@ public class PlayManager : MonoBehaviour, Manager
 
             CharacterMovement tmp = tmpObj.GetComponent<CharacterMovement>();
             tmp.setNickname(test);
+            if (fontIsBlack) tmp.setBlackFontColor();
 
             CinemachineTargetGroup.Target newTarget = new CinemachineTargetGroup.Target
             {
@@ -124,7 +119,7 @@ public class PlayManager : MonoBehaviour, Manager
             gameManager.Send(NetworkingType.RESET.ToString(), "open Map, so require reset list");
         }
     
-        for(int i = 1; i <= 10; i++)
+        for(int i = 1; i <= 20; i++)
         {
             RankinListObject.Add(PlayRanking.transform.Find("PlayRankingContent" + i).gameObject);
         }
