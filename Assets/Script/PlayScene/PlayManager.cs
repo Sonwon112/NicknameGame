@@ -35,7 +35,7 @@ public class PlayManager : MonoBehaviour, Manager
     
     private List<string> nicknameList = new List<string>();
     private List<GameObject> participantList = new List<GameObject> ();
-
+    private readonly object lockObj = new object();
     private List<GameObject> RankinListObject = new List<GameObject> ();
     private List<string> ResultRankingList = new List<string>();
     private List<string> DropOutRankingList = new List<string>();
@@ -230,16 +230,19 @@ public class PlayManager : MonoBehaviour, Manager
         {
             if(tmp.GetComponent<CharacterMovement>().NicknameText.text == rankNickname)
             {
-                participantList.Remove(tmp);
-                Destroy(participant.gameObject);
-                
-                if(participantList.Count <= 0)
+                lock (lockObj)
                 {
-                    isStart=false;
-                    ResultRankingList.AddRange(DropOutRankingList);
-                    EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
-                    EndRankingObj.SetActive(true) ;
-                    PlayRanking.SetActive(false);
+                    participantList.Remove(tmp);
+                    Destroy(participant.gameObject);
+
+                    if (participantList.Count <= 0)
+                    {
+                        isStart = false;
+                        ResultRankingList.AddRange(DropOutRankingList);
+                        EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
+                        EndRankingObj.SetActive(true);
+                        PlayRanking.SetActive(false);
+                    }
                 }
                 return;
             }
@@ -321,17 +324,21 @@ public class PlayManager : MonoBehaviour, Manager
             if (tmp.GetComponent<CharacterMovement>().NicknameText.text == rankNickname)
             {
                 DropOutRankingList.Insert(0, rankNickname);
-                participantList.Remove(tmp);
+                lock (lockObj)
+                {
+                    participantList.Remove(tmp);
+                    if (participantList.Count <= 0)
+                    {
+                        isStart = false;
+                        ResultRankingList.AddRange(DropOutRankingList);
+                        EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
+                        EndRankingObj.SetActive(true);
+                        PlayRanking.SetActive(false);
+                    }
+                }
                 //Destroy(participant.gameObject);
 
-                if (participantList.Count <= 0)
-                {
-                    isStart = false;
-                    ResultRankingList.AddRange(DropOutRankingList);
-                    EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
-                    EndRankingObj.SetActive(true);
-                    PlayRanking.SetActive(false);
-                }
+                
                 return;
             }
         }
