@@ -24,16 +24,20 @@ public class TeleportEvent : Event
         list.AddRange(PlayManager.getParticipantList());
         list.Remove(target.gameObject);
 
-        int targetIndex = UnityEngine.Random.Range(0, list.Count);
+        if(list.Count != 0)
+        {
+            int targetIndex = UnityEngine.Random.Range(0, list.Count);
 
-        target1 = target.gameObject;
-        target2 = list[targetIndex].gameObject;
-        potal1 = Instantiate(Potal, target.transform);
-        potal2 = Instantiate(Potal, list[targetIndex].transform);
-        potal1.transform.localPosition = potal2.transform.localPosition = new Vector3(0, -1, 0);
+            target1 = target.gameObject;
+            target2 = list[targetIndex].gameObject;
+            potal1 = Instantiate(Potal, target.transform);
+            potal2 = Instantiate(Potal, list[targetIndex].transform);
+            potal1.transform.localPosition = potal2.transform.localPosition = new Vector3(0, -1, 0);
 
-        isTeleport = true;
-        prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
+            isTeleport = true;
+            prevTime = DateTime.Now.TimeOfDay.TotalSeconds;
+        }
+       
     }
 
     private void Update()

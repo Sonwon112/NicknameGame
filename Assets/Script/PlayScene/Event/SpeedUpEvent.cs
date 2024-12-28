@@ -10,7 +10,7 @@ public class SpeedUpEvent : Event
         this.target = target;
         this.target.speedUp();
         GameObject tmp = Instantiate(effect, target.transform);
-        tmp.transform.localPosition = new Vector3(0, -0.5f,0);
+        tmp.transform.localPosition = new Vector3(0, -1f,0);
 
         Destroy(tmp, 3f);
     }

@@ -65,9 +65,9 @@ public class PlayManager : MonoBehaviour, Manager
         else
         {
             //test
-            for(int i = 1; i < 120;  i++)
+            for (int i = 1; i <= 120; i++)
             {
-                nicknameList.Add("test"+i);
+                nicknameList.Add("test" + i);
             }
         }
 

@@ -9,6 +9,7 @@ using WebSocketSharp;
 
 public class GameManager : MonoBehaviour
 {
+    private readonly object lockObj = new object();
     public static GameManager gameManagerInstance { get; set; }
     private static string TOKEN = "0niyaNicknameGame";
     private void Awake()
@@ -136,9 +137,10 @@ public class GameManager : MonoBehaviour
 
                 break;
         }
-        sceneManager.gettingMessage(dto.msg);
-
-
+        lock (lockObj)
+        {
+            sceneManager.gettingMessage(dto.msg);
+        }
     }
 
     /// <summary>

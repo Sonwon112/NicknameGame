@@ -216,7 +216,7 @@ public class CharacterMovement : MonoBehaviour
         {
             speed = changeSpeed();
             characterAnim.setSpeed(speed);
-            characterAnim.transform.Rotate(Vector3.up, -40);
+            //characterAnim.transform.Rotate(Vector3.up, -40);
         }
            
     }
