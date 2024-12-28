@@ -80,4 +80,7 @@ Assets/*
 !Assets/Scenes
 !Assets/Script
 !Assets/Plugins
-!Assets/resources
+
+Assets/Scenes/BackgroundModel
+Assets/Scenes/*_Setting/
+Assets/Scenes/*_Profiles/

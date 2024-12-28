@@ -3,19 +3,33 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SkyboxCamera
+  - Manager
+  - VirtualCam
+  - Roudolph
+  - IcyRoad
+  - TrackingObject
+  - Actors
+  - GasPlanet
+  - StonePlanet
+  - Snowball
+  - DropBox
+  - Push
+  - EventZone
+  - Cookie
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcess
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Muse Animate Posing
+  - Muse Animate Baking
+  - Muse Animate Handles
+  - Muse Animate Thumbnail
+  - Muse Animate Environment
   - 
   - 
   - 
