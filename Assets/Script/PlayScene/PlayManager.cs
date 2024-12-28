@@ -28,13 +28,14 @@ public class PlayManager : MonoBehaviour, Manager
     public GameObject PlayRanking;
     public GameObject EndRankingObj;
     public GameObject settingWindow;
+    public bool fontIsBlack = false;
 
     [Header("Header")]
     public EventCard EventCard;
     
     private List<string> nicknameList = new List<string>();
     private List<GameObject> participantList = new List<GameObject> ();
-
+    private readonly object lockObj = new object();
     private List<GameObject> RankinListObject = new List<GameObject> ();
     private List<string> ResultRankingList = new List<string>();
     private List<string> DropOutRankingList = new List<string>();
@@ -64,17 +65,10 @@ public class PlayManager : MonoBehaviour, Manager
         else
         {
             //test
-            nicknameList.Add("test1");
-            nicknameList.Add("test2");
-            nicknameList.Add("test3");
-            nicknameList.Add("test4");
-            nicknameList.Add("test5");
-            nicknameList.Add("test6");
-            nicknameList.Add("test7");
-            nicknameList.Add("test8");
-            nicknameList.Add("test9");
-            nicknameList.Add("test10");
-            nicknameList.Add("test11");
+            for (int i = 1; i <= 120; i++)
+            {
+                nicknameList.Add("test" + i);
+            }
         }
 
 
@@ -98,6 +92,7 @@ public class PlayManager : MonoBehaviour, Manager
 
             CharacterMovement tmp = tmpObj.GetComponent<CharacterMovement>();
             tmp.setNickname(test);
+            if (fontIsBlack) tmp.setBlackFontColor();
 
             CinemachineTargetGroup.Target newTarget = new CinemachineTargetGroup.Target
             {
@@ -124,7 +119,7 @@ public class PlayManager : MonoBehaviour, Manager
             gameManager.Send(NetworkingType.RESET.ToString(), "open Map, so require reset list");
         }
     
-        for(int i = 1; i <= 10; i++)
+        for(int i = 1; i <= 20; i++)
         {
             RankinListObject.Add(PlayRanking.transform.Find("PlayRankingContent" + i).gameObject);
         }
@@ -235,16 +230,19 @@ public class PlayManager : MonoBehaviour, Manager
         {
             if(tmp.GetComponent<CharacterMovement>().NicknameText.text == rankNickname)
             {
-                participantList.Remove(tmp);
-                Destroy(participant.gameObject);
-                
-                if(participantList.Count <= 0)
+                lock (lockObj)
                 {
-                    isStart=false;
-                    ResultRankingList.AddRange(DropOutRankingList);
-                    EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
-                    EndRankingObj.SetActive(true) ;
-                    PlayRanking.SetActive(false);
+                    participantList.Remove(tmp);
+                    Destroy(participant.gameObject);
+
+                    if (participantList.Count <= 0)
+                    {
+                        isStart = false;
+                        ResultRankingList.AddRange(DropOutRankingList);
+                        EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
+                        EndRankingObj.SetActive(true);
+                        PlayRanking.SetActive(false);
+                    }
                 }
                 return;
             }
@@ -326,17 +324,21 @@ public class PlayManager : MonoBehaviour, Manager
             if (tmp.GetComponent<CharacterMovement>().NicknameText.text == rankNickname)
             {
                 DropOutRankingList.Insert(0, rankNickname);
-                participantList.Remove(tmp);
+                lock (lockObj)
+                {
+                    participantList.Remove(tmp);
+                    if (participantList.Count <= 0)
+                    {
+                        isStart = false;
+                        ResultRankingList.AddRange(DropOutRankingList);
+                        EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
+                        EndRankingObj.SetActive(true);
+                        PlayRanking.SetActive(false);
+                    }
+                }
                 //Destroy(participant.gameObject);
 
-                if (participantList.Count <= 0)
-                {
-                    isStart = false;
-                    ResultRankingList.AddRange(DropOutRankingList);
-                    EndRankingObj.GetComponent<EndRanking>().setRankList(ResultRankingList);
-                    EndRankingObj.SetActive(true);
-                    PlayRanking.SetActive(false);
-                }
+                
                 return;
             }
         }

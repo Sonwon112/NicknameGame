@@ -87,6 +87,7 @@ public class ListManager : MonoBehaviour, Manager
         participantWindow.ClearParticiapnt();
         gameManager.Send(NetworkingType.PERMIT.ToString(), "stop");
         participantWindow.ToggleParticipant(false);
+        canPart = false;
         gameManager.ResetParticipantList();
     }
 
@@ -110,4 +111,8 @@ public class ListManager : MonoBehaviour, Manager
         settingWindow.SetActive(false);
     }
 
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
 }

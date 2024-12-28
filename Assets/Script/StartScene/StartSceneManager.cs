@@ -28,7 +28,7 @@ public class StartSceneManager : MonoBehaviour, Manager
     // Start is called before the first frame update
     void Start()
     {
-        
+        SettingWindow.GetComponent<SettingWindow>().ReadData();
 
         /*Debug.Log(settingText.ToString());
         Debug.Log(data.token);

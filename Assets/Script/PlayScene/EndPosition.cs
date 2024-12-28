@@ -23,7 +23,7 @@ public class EndPosition : MonoBehaviour
             PlayerList = GameObject.FindGameObjectsWithTag("Player").ToList();
             PlayerList = PlayerList.OrderBy(obj => this.transform.position.x - obj.transform.position.x).ToList();
             RankingArr.Clear();
-            int tmp = PlayerList.Count < 10 ? PlayerList.Count : 10;
+            int tmp = PlayerList.Count < 20 ? PlayerList.Count : 20;
             for (int i = 0; i < tmp; i++)
             {
                 RankingArr.Add(PlayerList[i].GetComponent<CharacterMovement>().NicknameText.text);

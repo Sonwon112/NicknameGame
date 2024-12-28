@@ -59,6 +59,7 @@ public class EventCard : MonoBehaviour
                 if (index >= countArr.Length)
                 {
                     callDraw = false;
+                    eventsList.Remove(eventsList[eventIndex]);
                     DisplayCard();
                     return;
                 }

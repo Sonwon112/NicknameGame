@@ -216,7 +216,7 @@ public class CharacterMovement : MonoBehaviour
         {
             speed = changeSpeed();
             characterAnim.setSpeed(speed);
-            characterAnim.transform.Rotate(Vector3.up, -40);
+            //characterAnim.transform.Rotate(Vector3.up, -40);
         }
            
     }
@@ -273,6 +273,10 @@ public class CharacterMovement : MonoBehaviour
                     playDownAnim();
                     Pushing();
                     break;
+                case "Cookie":
+                    other.GetComponent<CookieInstance>().CallDestroy();
+                    playDownAnim();
+                    break;
             }
 
         }
@@ -287,6 +291,11 @@ public class CharacterMovement : MonoBehaviour
             DropOut();
         }
 
+    }
+
+    public void setBlackFontColor()
+    {
+        NicknameText.color = Color.black;
     }
 
 }

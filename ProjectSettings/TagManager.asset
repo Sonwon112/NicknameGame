@@ -16,6 +16,8 @@ TagManager:
   - Snowball
   - DropBox
   - Push
+  - EventZone
+  - Cookie
   layers:
   - Default
   - TransparentFX
