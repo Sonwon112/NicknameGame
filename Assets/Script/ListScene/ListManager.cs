@@ -12,7 +12,7 @@ public class ListManager : MonoBehaviour, Manager
 
     private bool canPart = false;
     private GameManager gameManager = GameManager.gameManagerInstance;
-    private string appednNickname = "";
+    private List<string> appednNickname = new List<string>();
     private bool callAppend = false;
 
     // Start is called before the first frame update
@@ -30,8 +30,12 @@ public class ListManager : MonoBehaviour, Manager
     {
         if (callAppend)
         {
-            participantWindow.AppendParticipant(appednNickname);
+            foreach(string nickName in appednNickname)
+            {
+                participantWindow.AppendParticipant(nickName);
+            }
             callAppend = false;
+            appednNickname.Clear();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -77,7 +81,7 @@ public class ListManager : MonoBehaviour, Manager
     public void gettingMessage(string msg)
     {
         if (msg.Equals("fail") || msg.Equals("success")) return;
-        appednNickname = msg;
+        appednNickname.Add(msg);
         callAppend = true;
     }
 
